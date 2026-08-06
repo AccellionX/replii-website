@@ -1,0 +1,283 @@
+@import "tailwindcss";
+
+:root {
+  /* Surfaces */
+  --background: #f7f6f3;
+  --surface: #ffffff;
+  --surface-muted: #efeeea;
+  --surface-dark: #0c1612;
+
+  /* Text — tuned for WCAG AA on brand surfaces */
+  --text-primary: #14201c;
+  --text-secondary: #45554e;
+  --text-inverse: #f4f7f5;
+  --text-inverse-muted: #c5d4ce;
+
+  /* Borders */
+  --border: #d5d4ce;
+  --border-strong: #9aa39c;
+
+  /* Brand — primary darkened for AA contrast with white button text */
+  --primary: #0f766e;
+  --primary-hover: #115e59;
+  --primary-dark: #134e4a;
+  --accent-mint: #d1fae5;
+
+  /* Status */
+  --success: #047857;
+  --warning: #b45309;
+
+  /* Derived */
+  --primary-soft: color-mix(in srgb, var(--primary) 12%, white);
+  --shadow-sm: 0 1px 2px rgba(20, 32, 28, 0.04);
+  --shadow-md: 0 4px 16px rgba(20, 32, 28, 0.06), 0 1px 2px rgba(20, 32, 28, 0.04);
+  --shadow-lg: 0 12px 40px rgba(20, 32, 28, 0.08), 0 2px 6px rgba(20, 32, 28, 0.04);
+  --radius-card: 20px;
+  --radius-control: 12px;
+  --container: 1200px;
+  --header-height: 4.5rem;
+  --section-y: clamp(3.5rem, 7vw, 7.5rem);
+  --section-y-sm: clamp(2.75rem, 5vw, 4.5rem);
+  --touch-min: 2.75rem; /* 44px */
+
+  /* Compat aliases */
+  --bg: var(--background);
+  --ink: var(--text-primary);
+  --ink-soft: var(--text-primary);
+  --muted: var(--text-secondary);
+  --line: var(--border);
+  --accent: var(--primary);
+  --accent-hover: var(--primary-hover);
+  --accent-soft: var(--accent-mint);
+  --surface-deep: var(--surface-muted);
+  --foreground: var(--text-primary);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--text-primary);
+  --color-surface: var(--surface);
+  --color-surface-muted: var(--surface-muted);
+  --color-surface-dark: var(--surface-dark);
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-primary-dark: var(--primary-dark);
+  --color-accent-mint: var(--accent-mint);
+  --color-border: var(--border);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --font-sans: var(--font-body);
+  --font-display: var(--font-display);
+  --font-mono: var(--font-mono);
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--header-height) + 1rem);
+  overflow-x: clip;
+}
+
+body {
+  background: var(--background);
+  color: var(--text-primary);
+  font-family: var(--font-body), ui-sans-serif, system-ui, sans-serif;
+  font-size: 1rem;
+  line-height: 1.6;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+::selection {
+  background: color-mix(in srgb, var(--primary) 22%, white);
+  color: var(--text-primary);
+}
+
+*:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+.touch-target {
+  min-height: var(--touch-min);
+  min-width: var(--touch-min);
+}
+
+/* ——— Type scale ——— */
+.type-hero {
+  font-family: var(--font-display), ui-sans-serif, sans-serif;
+  font-size: clamp(2.25rem, 7vw, 4.75rem);
+  font-weight: 600;
+  line-height: 1.08;
+  letter-spacing: -0.04em;
+  color: var(--text-primary);
+  overflow-wrap: anywhere;
+}
+
+.type-section {
+  font-family: var(--font-display), ui-sans-serif, sans-serif;
+  font-size: clamp(1.625rem, 3.5vw, 2.5rem);
+  font-weight: 600;
+  line-height: 1.18;
+  letter-spacing: -0.03em;
+  color: var(--text-primary);
+  text-wrap: balance;
+  overflow-wrap: break-word;
+}
+
+.type-subsection {
+  font-family: var(--font-display), ui-sans-serif, sans-serif;
+  font-size: clamp(1.0625rem, 2vw, 1.35rem);
+  font-weight: 600;
+  line-height: 1.35;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+  overflow-wrap: break-word;
+}
+
+.type-body {
+  font-family: var(--font-body), ui-sans-serif, sans-serif;
+  font-size: 1.0625rem;
+  font-weight: 400;
+  line-height: 1.65;
+  color: var(--text-primary);
+}
+
+.type-body-muted {
+  font-family: var(--font-body), ui-sans-serif, sans-serif;
+  font-size: 1.0625rem;
+  font-weight: 400;
+  line-height: 1.65;
+  color: var(--text-secondary);
+}
+
+.type-eyebrow {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--primary-dark);
+}
+
+.type-metric-label {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+.type-metric-value {
+  font-family: var(--font-display), ui-sans-serif, sans-serif;
+  font-size: clamp(1.5rem, 3vw, 2.25rem);
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  color: var(--text-primary);
+}
+
+.prose-width {
+  max-width: 36rem;
+}
+
+.hero-grid {
+  background-image:
+    linear-gradient(to right, rgba(20, 32, 28, 0.035) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(20, 32, 28, 0.035) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(ellipse 70% 55% at 50% 28%, black, transparent);
+}
+
+.section-pad {
+  padding-block: var(--section-y);
+}
+
+.section-pad-sm {
+  padding-block: var(--section-y-sm);
+}
+
+.scroll-mt-header {
+  scroll-margin-top: calc(var(--header-height) + 1rem);
+}
+
+/* Prevent mockups/tables from blowing out narrow viewports */
+.mockup-frame {
+  min-width: 0;
+  max-width: 100%;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
+.table-scroll {
+  min-width: 0;
+  max-width: 100%;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* FAQ: gentle open/close without replacing native details behavior */
+.faq-details-panel {
+  overflow: hidden;
+}
+
+.faq-details summary {
+  min-height: var(--touch-min);
+}
+
+@supports (interpolate-size: allow-keywords) {
+  :root {
+    interpolate-size: allow-keywords;
+  }
+
+  .faq-details::details-content {
+    block-size: 0;
+    opacity: 0;
+    overflow: clip;
+    transition:
+      block-size 0.22s ease,
+      opacity 0.18s ease,
+      content-visibility 0.22s allow-discrete;
+  }
+
+  .faq-details[open]::details-content {
+    block-size: auto;
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .faq-details::details-content {
+    transition: none;
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --header-height: 3.75rem;
+    --radius-card: 16px;
+  }
+
+  .section-pad {
+    padding-block: clamp(3rem, 10vw, 4rem);
+  }
+}
