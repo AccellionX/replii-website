@@ -8,7 +8,7 @@ type LogoProps = {
 
 /**
  * Custom Replii mark: three staggered reply arcs suggesting
- * fast conversation flow across Instagram, Messenger, and WhatsApp.
+ * fast conversation flow across WhatsApp, Instagram, and Facebook.
  */
 export function Logo({
   className,

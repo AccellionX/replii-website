@@ -3,44 +3,77 @@ import { CTA } from "@/lib/constants";
 /* ——— Credibility strip ——— */
 
 export const CREDIBILITY_CHANNELS = [
-  "Instagram",
-  "Messenger",
   "WhatsApp",
+  "Instagram",
+  "Facebook",
+  "Live inbox",
   "Google Sheets",
-  "CRM",
-  "Webhooks",
+  "Agency billing",
 ] as const;
 
 /* ——— Problem / timeline ——— */
 
 export const PROBLEM_TIMELINE = [
-  { time: "2:47 AM", label: "Lead messages from your ad", accent: false },
-  { time: "2:47 AM", label: "Replii replies and identifies intent", accent: true },
-  { time: "2:49 AM", label: "Lead is qualified", accent: true },
-  { time: "8:30 AM", label: "Your team receives the summary", accent: false },
+  { time: "11:02 PM", label: "Ad lead messages the client", accent: false },
+  { time: "11:02 PM", label: "Replii replies in seconds", accent: true },
+  { time: "11:04 PM", label: "Lead is qualified, booked, or ordered", accent: true },
+  { time: "8:30 AM", label: "A teammate takes over if needed", accent: false },
 ] as const;
 
 export const PROBLEM_WITHOUT = [
-  "Someone must monitor multiple channels",
-  "The same questions are answered repeatedly",
-  "Leads wait during breaks and after hours",
-  "Important prospects get mixed with casual inquiries",
-  "Salespeople qualify weak leads manually",
-  "Coverage depends on staff availability",
+  "Ad leads sit unread after 5–10 minutes — intent dies",
+  "Nobody is staffing WhatsApp, Instagram, or Facebook at 11pm",
+  "Agencies cannot sit in 10 WhatsApp Business apps",
+  "Retainers get blamed on “the ads” when the leak was the inbox",
+  "Each client is a separate inbox with no shared view",
+  "The shop should never see a SaaS invoice",
 ] as const;
 
 export const PROBLEM_WITH = [
-  "Every inquiry receives an immediate response",
-  "Common questions are handled automatically",
-  "Lead details are collected consistently",
-  "Serious prospects are identified",
-  "Qualified leads are routed to the team",
-  "A human can step in at any time",
+  "Every ad lead gets an instant first reply on the client’s own channels",
+  "One dashboard across clients, WhatsApp, Instagram, and Facebook",
+  "AI qualifies, books demos, or takes orders from the knowledge base",
+  "A human can jump into any thread from the live inbox",
+  "Each client is isolated — Agency A never sees Agency B",
+  "Stripe bills the agency. Advertisers get a workspace, not a bill",
+] as const;
+
+/* ——— Who this is for ——— */
+
+export const AUDIENCE_BUYERS = [
+  "Performance / lead-gen agencies running Meta ads for local businesses",
+  "WhatsApp marketing shops that need more than a broadcast tool",
+  "Digital agencies packaging an AI inbox as a retainer add-on",
+  "White-label operators who want their name on the dashboard",
+  "Franchise or multi-location groups acting as an internal agency",
+] as const;
+
+export const AUDIENCE_CLIENTS = [
+  "Clinics, dentists, pharmacies, gyms, salons, spas",
+  "Restaurants, bakeries, catering, grocery, dairy, meat, water supply",
+  "Retail: clothing, shoes, electronics, hardware, florists",
+  "Services: real estate, legal, insurance, tuition, travel, home services, auto workshops",
+  "Any business whose ads say “message us on WhatsApp / Instagram / Facebook”",
+] as const;
+
+export const AUDIENCE_ROLES = [
+  {
+    title: "Super admin",
+    body: "AccellionX. Creates agencies, suspends accounts, and collects Stripe from agencies only.",
+  },
+  {
+    title: "Agency admin",
+    body: "You. Invite client businesses, pick a plan, watch pooled usage, white-label if entitled.",
+  },
+  {
+    title: "Business owner",
+    body: "The restaurant / clinic / shop. Connects their Meta channels, edits the bot, works the inbox. Never billed.",
+  },
 ] as const;
 
 /* ——— Interactive demo scenarios ——— */
 
-export type DemoScenarioId = "dental" | "real-estate" | "home-services";
+export type DemoScenarioId = "dental" | "restaurant" | "real-estate";
 
 export type DemoScenario = {
   id: DemoScenarioId;
@@ -57,7 +90,7 @@ export const DEMO_SCENARIOS: DemoScenario[] = [
   {
     id: "dental",
     label: "Dental clinic",
-    source: "Instagram Ad — Dental Implants",
+    source: "WhatsApp Ad — Dental Implants",
     incoming: "How much does one implant cost?",
     qualification: [
       "Treatment type",
@@ -65,10 +98,21 @@ export const DEMO_SCENARIOS: DemoScenario[] = [
       "Timeline",
       "Consultation availability",
     ],
-    answers: ["Single implant", "Austin, TX", "This month", "Weekday afternoons"],
-    outcome: "Consultation requested",
+    answers: ["Single implant", "Karachi", "This month", "Weekday afternoons"],
+    outcome: "Demo slot offered",
     repliiOpener:
       "Happy to help with implant pricing. A few quick questions so we can give you an accurate next step.",
+  },
+  {
+    id: "restaurant",
+    label: "Restaurant",
+    source: "WhatsApp Ad — Weekend Specials",
+    incoming: "Do you deliver biryani tonight?",
+    qualification: ["Order type", "Area", "Items", "Time"],
+    answers: ["Delivery", "DHA Phase 5", "Chicken biryani ×2", "Tonight 8pm"],
+    outcome: "Order captured in cart",
+    repliiOpener:
+      "Yes — we deliver tonight. I can take the order here. What would you like, and where should we send it?",
   },
   {
     id: "real-estate",
@@ -81,21 +125,10 @@ export const DEMO_SCENARIOS: DemoScenario[] = [
       "Buying timeline",
       "Financing status",
     ],
-    answers: ["$450–550k", "Downtown core", "Next 60 days", "Pre-approved"],
+    answers: ["PKR 2.5–3.5 cr", "Downtown core", "Next 60 days", "Pre-approved"],
     outcome: "Qualified lead sent to agent",
     repliiOpener:
       "Yes — that two-bedroom is still listed. Let me confirm fit so I can connect you with the right agent.",
-  },
-  {
-    id: "home-services",
-    label: "Home services",
-    source: "Instagram Ad — Emergency Plumbing",
-    incoming: "I have a leaking pipe. Can someone come today?",
-    qualification: ["Service type", "ZIP code", "Urgency", "Property type"],
-    answers: ["Pipe leak / repair", "78704", "Same-day", "Single-family home"],
-    outcome: "Urgent callback requested",
-    repliiOpener:
-      "Sorry about the leak — we can help today. I need a few details to prioritize a tech.",
   },
 ];
 
@@ -103,51 +136,51 @@ export const DEMO_SCENARIOS: DemoScenario[] = [
 
 export const MEDIUM_FEATURES = [
   {
-    title: "Knowledge base",
-    body: "Stop retyping services, pricing guidance, FAQs and policies—train Replii once and reuse approved answers.",
+    title: "Knowledge base + grounded answers",
+    body: "Keyword then AI match against the client’s FAQs and facts. Replii stays on their information — not generic chat.",
   },
   {
-    title: "Appointment booking",
-    body: "Reduce back-and-forth scheduling by offering times and capturing booking details in the first conversation.",
+    title: "Demo slots and bookings calendar",
+    body: "Qualify, then offer times. Confirmed slots land on the bookings calendar instead of a back-and-forth thread.",
   },
   {
-    title: "CRM and Google Sheets sync",
-    body: "Cut manual copy-paste by sending qualified lead details into the tools your team already uses.",
+    title: "Order cart and Google Sheets",
+    body: "Catalog flows with an interactive cart for food and retail. Optional Google Sheet upsert for ops teams that still live in Sheets.",
   },
 ] as const;
 
 export const SMALL_FEATURES = [
   {
-    title: "Lead summaries",
-    body: "Skip reading every thread from scratch—open a ready summary before you reply.",
+    title: "40+ niche templates",
+    body: "Greeting, questions, FAQs, and menus for clinics, restaurants, real estate, retail, and services — every line editable.",
   },
   {
-    title: "Broadcast follow-up",
-    body: "Reduce one-by-one chase messages with approved follow-up campaigns.",
+    title: "English, Urdu, Roman Urdu",
+    body: "Starter copy in all three. Written for Pakistan / Gulf-style local commerce and easy to edit for other markets.",
   },
   {
-    title: "Multi-location support",
-    body: "Avoid juggling separate inboxes when brands or locations share the same first-response rules.",
+    title: "White-label dashboard",
+    body: "Replace the Replii wordmark with the agency name. Growth add-on or included on Unlimited.",
   },
   {
-    title: "Multilingual replies",
-    body: "Handle common questions in more than one language without assigning extra reply coverage.",
+    title: "Client analytics",
+    body: "Leads today and this month, conversations, and usage you can put in monthly retainer reports.",
   },
   {
-    title: "Analytics",
-    body: "See how much first-response and qualification work was handled before handoff.",
+    title: "Channel badges",
+    body: "Tag every contact WhatsApp, Instagram, or Messenger so the team always knows where the chat started.",
   },
   {
-    title: "Routing rules",
-    body: "Send serious prospects to the right person instead of sorting the inbox by hand.",
+    title: "Embedded Signup",
+    body: "Owners connect their own WhatsApp Business number from the dashboard — no token-copying, no shared agency number.",
   },
   {
-    title: "Industry templates",
-    body: "Start from proven qualification questions so setup is not a blank page.",
+    title: "Invite a client in one step",
+    body: "Name, login, WhatsApp-ready draft. They connect Meta themselves. You never mix inboxes.",
   },
   {
-    title: "Webhooks and API",
-    body: "Pass outcomes into custom workflows without re-entering lead data.",
+    title: "Isolated workspaces",
+    body: "Hard tenancy: agencies never see each other’s chats or customers. Owners cannot open another business’s config.",
   },
 ] as const;
 
@@ -155,63 +188,68 @@ export const DEMO_INBOX_WORK = [
   "Answered the initial inquiry",
   "Shared approved information",
   "Asked qualification questions",
-  "Captured lead details",
+  "Captured lead or order details",
   "Identified urgency",
   "Offered the next step",
   "Created lead summary",
-  "Routed to team",
+  "Routed to the live inbox",
 ] as const;
 
 export const WORKLOAD_COMPARISON_ROWS = [
   {
     responsibility: "Monitor incoming messages",
-    manual: "Must remain available and switch between channels",
-    replii: "Monitors connected channels continuously",
+    manual: "Sit in each client’s WhatsApp, Instagram, and Facebook apps",
+    replii: "One live inbox across clients and channels",
     human: "No",
   },
   {
     responsibility: "Answer common questions",
-    manual: "Types similar replies repeatedly",
-    replii: "Responds using approved business information",
+    manual: "Type the same replies on every retainer",
+    replii: "Responds from the client’s knowledge base",
     human: "Only for exceptions",
   },
   {
-    responsibility: "Collect lead details",
-    manual: "Asks questions manually",
-    replii: "Runs a consistent qualification flow",
+    responsibility: "Qualify, book, or take the order",
+    manual: "Ask questions and build the cart by hand",
+    replii: "Runs the template flow — demo slots or interactive cart",
     human: "No",
   },
   {
     responsibility: "Identify serious leads",
-    manual: "Reviews each conversation individually",
-    replii: "Tags and summarizes lead intent",
+    manual: "Read every thread before the morning standup",
+    replii: "Pipeline: in progress, booked, needs you",
     human: "Reviews qualified summary",
   },
   {
     responsibility: "Handle negotiation",
     manual: "Required",
-    replii: "Routes to a person",
+    replii: "Pauses for human takeover and mute",
     human: "Yes",
   },
   {
     responsibility: "Close the sale",
     manual: "Required for consultative sales",
-    replii: "Supports booking and handoff",
+    replii: "Supports booking, orders, and handoff",
     human: "Yes",
   },
 ] as const;
 
-export const PILOT_REVIEW_METRICS = [
-  "Initial inquiries received",
-  "Response time",
-  "Questions answered automatically",
-  "Leads qualified",
-  "Human takeovers",
-  "After-hours conversations",
-  "Appointments or handoffs created",
+export const ORDER_STEPS = [
+  "Choose Launch, Growth, or Agency Unlimited and complete Stripe Checkout.",
+  "AccellionX creates an isolated agency workspace from the name and admin username you provided.",
+  "Log in at app.replii.accellionx.com with the credentials we send you.",
+  "Invite your first client. They connect WhatsApp (and Instagram / Facebook) on their own brand.",
+  "Pick a template, publish the greeting, test a conversation, then point Meta ads at the client’s channels.",
 ] as const;
 
-/* ——— Industries ——— */
+export const ORDER_SCOPE = [
+  "Billed entity: your agency, not your clients",
+  "Each client uses their own WhatsApp, Instagram, and Facebook Page",
+  "Cancel or change plan any time in the Stripe portal",
+  "White-label: Growth + $79/mo, or included on Unlimited",
+] as const;
+
+/* ——— Industries / niche templates ——— */
 
 export type IndustryUseCase = {
   name: string;
@@ -222,16 +260,54 @@ export type IndustryUseCase = {
   repliiHandles: string;
 };
 
+export const NICHE_TEMPLATE_CATEGORIES = [
+  {
+    category: "Health & wellness",
+    packs:
+      "Clinic / doctor, dental, pharmacy, salon booking, spa, gym, pet care",
+  },
+  {
+    category: "Food & grocery",
+    packs:
+      "Restaurant, reservations, bakery, catering, grocery, fruits & veg, meat, dairy, water supplier",
+  },
+  {
+    category: "Retail",
+    packs:
+      "Clothing, boutique, shoes, electronics, mobile accessories, hardware, florist, general store",
+  },
+  {
+    category: "Local services",
+    packs:
+      "Home services, laundry, auto workshop, mobile repair, interior, photography, wedding",
+  },
+  {
+    category: "Professional",
+    packs:
+      "Real estate, legal, insurance/finance, education/tuition, travel, digital agency, POS lead",
+  },
+] as const;
+
 export const industryUseCases: IndustryUseCase[] = [
   {
     name: "Dental and medical clinics",
     question: "How much are implants?",
     qualifies: "Treatment, city, timeline and consultation availability",
-    action: "Books consultation",
+    action: "Offers a demo slot",
     staffUsuallyAnswer:
       "Pricing ranges, treatment options, location, and whether a consult is needed",
     repliiHandles:
       "First reply, service and timeline questions, and consult handoff summary",
+  },
+  {
+    name: "Restaurants and food",
+    question: "Do you deliver biryani tonight?",
+    qualifies: "Order type, area, items and time",
+    action: "Builds the order cart",
+    staffUsuallyAnswer:
+      "Menu, delivery area, timings, and order details",
+    repliiHandles:
+      "Greeting, catalog cart, and an order the kitchen can fulfil",
   },
   {
     name: "Real estate",
@@ -254,7 +330,7 @@ export const industryUseCases: IndustryUseCase[] = [
       "Offer answers, schedule preference capture, and trial booking handoff",
   },
   {
-    name: "Beauty and aesthetics",
+    name: "Beauty, salon and spa",
     question: "How much is a hydrafacial?",
     qualifies: "Service, preferred date, provider preference and first-time status",
     action: "Books appointment",
@@ -264,7 +340,7 @@ export const industryUseCases: IndustryUseCase[] = [
       "Price and service FAQ, date preference, and appointment request summary",
   },
   {
-    name: "Education and training",
+    name: "Education and tuition",
     question: "When does the next cohort start?",
     qualifies: "Program interest, experience level, start window and budget range",
     action: "Schedules admissions call",
@@ -284,57 +360,46 @@ export const industryUseCases: IndustryUseCase[] = [
       "Initial trip questions, qualification details, and consult routing",
   },
   {
-    name: "Automotive",
-    question: "Is the SUV still in stock with financing?",
-    qualifies: "Model interest, trade-in, timeline and financing needs",
-    action: "Books test drive",
+    name: "Auto workshops",
+    question: "Can you look at a brake noise today?",
+    qualifies: "Service type, vehicle, urgency and location",
+    action: "Requests a bay slot",
     staffUsuallyAnswer:
-      "Inventory status, trim interest, financing questions, and appointment times",
+      "Service type, wait times, parts questions, and drop-off windows",
     repliiHandles:
-      "Stock and model FAQ, financing intent capture, and test-drive handoff",
+      "Urgent first reply, vehicle and urgency capture, and booking handoff",
   },
   {
     name: "Home services",
     question: "I have a leaking pipe. Can someone come today?",
-    qualifies: "Service type, ZIP code, urgency and property type",
+    qualifies: "Service type, area, urgency and property type",
     action: "Requests urgent callback",
     staffUsuallyAnswer:
       "Service type, service area, urgency, and same-day availability",
     repliiHandles:
-      "Urgent first reply, ZIP and urgency capture, and callback routing",
+      "Urgent first reply, area and urgency capture, and callback routing",
   },
   {
-    name: "Restaurants",
-    question: "Do you have a table for four this Saturday?",
-    qualifies: "Party size, date, time preference and occasion",
-    action: "Creates reservation request",
-    staffUsuallyAnswer:
-      "Availability, party size, timing, and special occasion notes",
-    repliiHandles:
-      "Reservation questions, party details, and request summary for staff",
-  },
-  {
-    name: "Ecommerce",
-    question: "Does this ship before Friday?",
+    name: "Retail",
+    question: "Do you have this in size 42, and can you deliver today?",
     qualifies: "Product, size or variant, delivery window and order intent",
     action: "Captures order details in chat",
     staffUsuallyAnswer:
-      "Shipping windows, size or variant options, and order readiness",
+      "Stock, size or variant options, and delivery readiness",
     repliiHandles:
-      "Shipping FAQ, product details, and order-intent summary",
+      "Catalog FAQ, product details, and order-intent summary",
   },
 ];
 
 /* ——— Pricing ——— */
 
-export type BillingPeriod = "monthly" | "annual";
+export type PricingPlanId = "launch" | "growth" | "unlimited";
 
 export type PricingPlan = {
-  id: "starter" | "pro" | "agency";
+  id: PricingPlanId;
   name: string;
   bestFor: string;
   monthly: number;
-  annual: number;
   conversations: string;
   highlighted?: boolean;
   cta: string;
@@ -344,98 +409,109 @@ export type PricingPlan = {
 
 export const PRICING_PLANS: PricingPlan[] = [
   {
-    id: "starter",
-    name: "Starter",
-    bestFor:
-      "For a small business that needs reliable first-response coverage",
-    monthly: 99,
-    annual: 990,
-    conversations: "500 / mo",
-    cta: CTA.starter.label,
-    ctaHref: CTA.starter.href,
-    features: [
-      "1 business",
-      "Instagram and Messenger",
-      "AI replies",
-      "FAQ knowledge base",
-      "Lead capture",
-      "Google Sheets or CRM sync",
-      "Up to 500 conversations per month",
-      "Standard support",
-    ],
-  },
-  {
-    id: "pro",
-    name: "Pro",
-    bestFor:
-      "For a growing business that wants qualification, booking, and human handoff",
-    monthly: 249,
-    annual: 2490,
+    id: "launch",
+    name: "Launch",
+    bestFor: "For agencies proving the offer on a handful of retainers.",
+    monthly: 97,
     conversations: "2,000 / mo",
-    highlighted: true,
-    cta: CTA.pro.label,
-    ctaHref: CTA.pro.href,
+    cta: CTA.launch.label,
+    ctaHref: CTA.launch.href,
     features: [
-      "Everything in Starter",
-      "WhatsApp",
-      "AI qualification and lead scoring",
-      "Ad attribution",
-      "Live inbox",
-      "Human takeover",
-      "Booking flows",
-      "Broadcasts",
-      "Advanced dashboard",
-      "Up to 2,000 conversations per month",
-      "Priority support",
+      "Up to 3 client businesses",
+      "2,000 AI conversations (pooled)",
+      "Standard AI model",
+      "WhatsApp + Instagram + Facebook",
+      "Live inbox + human takeover",
+      "40+ niche templates",
+      "Client analytics dashboard",
+      "Email support",
+      "White-label — not included",
     ],
   },
   {
-    id: "agency",
-    name: "Agency",
-    bestFor:
-      "For teams managing multiple brands, locations, or client inboxes",
-    monthly: 599,
-    annual: 5990,
-    conversations: "6,000 / mo",
-    cta: CTA.agency.label,
-    ctaHref: CTA.agency.href,
+    id: "growth",
+    name: "Growth",
+    bestFor: "For agencies with a full book of Meta-ad clients.",
+    monthly: 297,
+    conversations: "8,000 / mo",
+    highlighted: true,
+    cta: CTA.growth.label,
+    ctaHref: CTA.growth.href,
     features: [
-      "Everything in Pro",
-      "Up to 5 businesses or locations",
-      "Multiple pages and numbers",
-      "Pooled conversation allowance",
-      "Team roles",
-      "Client reporting",
-      "Onboarding support",
-      "Up to 6,000 conversations per month",
+      "Up to 10 client businesses",
+      "8,000 AI conversations (pooled)",
+      "Standard AI, Advanced on 3 clients",
+      "WhatsApp + Instagram + Facebook",
+      "Live inbox + human takeover",
+      "40+ niche templates",
+      "Client analytics dashboard",
+      "Email support",
+      "White-label + branded reports +$79/mo",
+    ],
+  },
+  {
+    id: "unlimited",
+    name: "Agency Unlimited",
+    bestFor: "For shops that productize Replii as their own platform.",
+    monthly: 497,
+    conversations: "20,000 / mo",
+    cta: CTA.unlimited.label,
+    ctaHref: CTA.unlimited.href,
+    features: [
+      "Unlimited client businesses",
+      "20,000 AI conversations (pooled)",
+      "Advanced AI on every client",
+      "WhatsApp + Instagram + Facebook",
+      "Live inbox + human takeover",
+      "40+ niche templates",
+      "Client analytics dashboard",
+      "White-label + branded reports included",
+      "Priority support",
     ],
   },
 ];
 
 export const COMPARISON_ROWS: {
   feature: string;
-  starter: string | boolean;
-  pro: string | boolean;
-  agency: string | boolean;
+  launch: string | boolean;
+  growth: string | boolean;
+  unlimited: string | boolean;
 }[] = [
-  { feature: "Businesses / locations", starter: "1", pro: "1", agency: "Up to 5" },
-  { feature: "Instagram & Messenger", starter: true, pro: true, agency: true },
-  { feature: "WhatsApp", starter: false, pro: true, agency: true },
-  { feature: "AI replies", starter: true, pro: true, agency: true },
-  { feature: "AI qualification & scoring", starter: false, pro: true, agency: true },
-  { feature: "Ad attribution", starter: false, pro: true, agency: true },
-  { feature: "Live inbox & human takeover", starter: false, pro: true, agency: true },
-  { feature: "Booking flows", starter: false, pro: true, agency: true },
-  { feature: "Broadcasts", starter: false, pro: true, agency: true },
-  { feature: "Team roles", starter: false, pro: false, agency: true },
-  { feature: "Client reporting", starter: false, pro: false, agency: true },
-  { feature: "Conversations / month", starter: "500", pro: "2,000", agency: "6,000" },
+  { feature: "Monthly price", launch: "$97", growth: "$297", unlimited: "$497" },
+  { feature: "Client businesses", launch: "3", growth: "10", unlimited: "Unlimited" },
   {
-    feature: "Support",
-    starter: "Standard",
-    pro: "Priority",
-    agency: "Onboarding + priority",
+    feature: "AI conversations (pooled / month)",
+    launch: "2,000",
+    growth: "8,000",
+    unlimited: "20,000",
   },
+  {
+    feature: "AI model",
+    launch: "Standard",
+    growth: "Standard + Advanced × 3",
+    unlimited: "Advanced all",
+  },
+  {
+    feature: "WhatsApp + Instagram + Facebook",
+    launch: true,
+    growth: true,
+    unlimited: true,
+  },
+  {
+    feature: "Live inbox + human takeover",
+    launch: true,
+    growth: true,
+    unlimited: true,
+  },
+  { feature: "Niche templates", launch: true, growth: true, unlimited: true },
+  { feature: "Client analytics", launch: true, growth: true, unlimited: true },
+  {
+    feature: "White-label + branded reports",
+    launch: false,
+    growth: "+$79/mo",
+    unlimited: "Included",
+  },
+  { feature: "Support", launch: "Email", growth: "Email", unlimited: "Priority" },
 ];
 
 export function formatUsd(amount: number) {
@@ -465,120 +541,86 @@ export const FAQ_GROUPS: FAQGroup[] = [
     title: "Product",
     items: [
       {
-        question: "Is Replii meant to replace my sales team?",
+        question: "Do we need one WhatsApp number per client?",
         answer:
-          "No. Replii handles repetitive first-response and qualification work. Your team remains responsible for conversations that require judgment, relationship-building, negotiation, or closing.",
-      },
-      {
-        question: "Can my team take over at any time?",
-        answer:
-          "Yes. Your team can view conversations and take control whenever a lead needs personal attention.",
-      },
-      {
-        question: "What kinds of questions can Replii answer?",
-        answer:
-          "Replii can answer approved questions based on your services, pricing guidance, locations, hours, policies, availability rules, and knowledge sources.",
-      },
-      {
-        question: "What happens when Replii does not know the answer?",
-        answer:
-          "It can ask for clarification, use a configured fallback, flag the conversation, or route it to a human instead of inventing information.",
-      },
-      {
-        question: "Can Replii cover nights and weekends?",
-        answer:
-          "Yes. Replii can respond and qualify leads outside normal business hours while following the rules and information you configure.",
-      },
-      {
-        question: "Do I still need a human inbox manager?",
-        answer:
-          "That depends on lead volume and sales complexity. Replii can significantly reduce repetitive monitoring and first-response work, but unusual, sensitive, or high-value conversations may still require a person.",
+          "Yes. Each client uses their own WhatsApp Business, Instagram, and Facebook Page. Replii never mixes inboxes and never uses a shared agency number.",
       },
       {
         question: "Which channels does Replii support?",
         answer:
-          "Replii works across Instagram DMs, Facebook Messenger and WhatsApp — the messaging surfaces where Meta ad leads typically arrive.",
+          "WhatsApp Business (primary production channel, own WABA), Instagram Direct, and Facebook Messenger. The same lead flow, knowledge base, inbox, and human takeover run across all three.",
       },
       {
-        question: "How does Replii know which ad generated the lead?",
+        question: "Can a shop subscribe directly?",
         answer:
-          "Replii captures available campaign and ad attribution context with each conversation so you can see which ad, campaign and message started the thread.",
+          "No. Replii is sold to agencies. A single-location business should ask their media agency to add them as a client, or become an agency on Launch.",
       },
       {
-        question: "Can it book appointments or capture orders?",
+        question: "What is an “AI conversation”?",
         answer:
-          "Yes. You can configure booking flows and in-chat order capture so qualified leads move to the next step without leaving the conversation.",
+          "A chat the bot handled that month, pooled across all of your clients. Human-only threads after takeover still appear in the inbox; the cap is on AI work.",
       },
       {
-        question: "Can I train it on my business information?",
+        question: "Can my team take over at any time?",
         answer:
-          "Yes. You can train Replii with your services, pricing, FAQs, website content, policies, tone and qualification rules.",
+          "Yes. If someone taps “talk to a person,” the bot pauses. The team replies from the live inbox and can mute until they are done.",
+      },
+      {
+        question: "Can it book appointments or take orders?",
+        answer:
+          "Yes. Qualification flows can offer demo slots onto a bookings calendar. Food and retail templates include an interactive catalog cart. Optional Google Sheets sync is available for ops teams.",
+      },
+      {
+        question: "What languages?",
+        answer:
+          "English, Urdu, and Roman Urdu out of the box. Templates are written for Pakistan / Gulf-style local commerce and edit cleanly for other markets.",
+      },
+      {
+        question: "What happens when the AI does not know the answer?",
+        answer:
+          "Answers are grounded in the client’s knowledge base. If the model is unavailable, chat falls back gracefully — it never dies silently. Keyword FAQs still work if you hit the monthly conversation cap.",
       },
     ],
   },
   {
     id: "setup-pricing",
-    title: "Setup and pricing",
+    title: "Plans, billing, and setup",
     items: [
       {
-        question: "How long does setup take?",
+        question: "Who does Stripe charge?",
         answer:
-          "Many businesses can go live quickly once channels and a primary qualification flow are confirmed. Exact timing depends on channel access, knowledge sources and integration needs — and is confirmed before activation.",
+          "The agency only. Advertisers and shop owners are never billed by Replii. They get a workspace and connect their own Meta channels.",
+      },
+      {
+        question: "Can we put our brand on it?",
+        answer:
+          "Growth add-on ($79/mo) or Agency Unlimited (included) replaces the Replii wordmark in the dashboard with the agency name, plus branded reports.",
+      },
+      {
+        question: "Is Meta ads spend included?",
+        answer:
+          "No. Media buy stays on the client’s or agency’s Meta account. Replii is the conversation layer after the click.",
+      },
+      {
+        question: "What happens if we hit a cap?",
+        answer:
+          "Hitting the client cap blocks new invites until you upgrade. Hitting the conversation cap pauses AI replies for the rest of the month — keyword FAQs still work. Upgrade or wait for the next period.",
+      },
+      {
+        question: "How do we order?",
+        answer:
+          "Choose a plan on this site and complete Stripe Checkout. Include the agency legal name and the admin username you want. After payment, AccellionX creates an isolated workspace and emails the login. Then invite clients and connect their channels from app.replii.accellionx.com.",
+      },
+      {
+        question: "How long does setup take for a client?",
+        answer:
+          "The owner finishes a short guided setup, connects WhatsApp via Embedded Signup (and Instagram / Facebook Page), picks a niche template, and publishes. Ads and organic DMs then hit the same operator.",
       },
       {
         question: "Do I need to replace my CRM?",
         answer:
-          "No. Replii can sync qualified lead data into your existing workflow through CRM sync, Google Sheets or webhooks.",
-      },
-      {
-        question: "What counts as a conversation?",
-        answer:
-          "A conversation is a messaging thread Replii handles with a lead within your plan’s monthly allowance. Exact counting rules are confirmed in your plan or pilot terms.",
-      },
-      {
-        question: "Can I manage multiple brands or locations?",
-        answer:
-          "Yes on Agency plans — up to five businesses or locations, with options for multiple pages, numbers and pooled conversation allowance. Higher needs can be scoped separately.",
-      },
-      {
-        question: "Is WhatsApp required?",
-        answer:
-          "No. Starter includes Instagram and Messenger. WhatsApp is available on Pro and Agency.",
-      },
-      {
-        question: "Can Replii work with my current Meta campaigns?",
-        answer:
-          "Yes. Replii is designed to work with the click-to-message and DM traffic your existing Meta campaigns already generate.",
-      },
-      {
-        question: "Is the pilot available to every business?",
-        answer:
-          "Not automatically. Pilot terms, setup scope and eligibility are confirmed before activation so we can make sure the use case and channels are a fit.",
+          "No. Leads, urgency, notes, tags, and a bookings calendar live in Replii. Optional Google Sheet upsert covers ops teams that still work in Sheets.",
       },
     ],
   },
 ];
-
-/* ——— Pilot / founding ——— */
-
-export const PILOT_STEPS = [
-  "Connect channels",
-  "Configure qualification",
-  "Review conversations and outcomes",
-] as const;
-
-export const PILOT_SCOPE = [
-  "One business",
-  "One primary use case",
-  "Real campaign traffic",
-  "Dashboard access",
-  "Human takeover enabled",
-] as const;
-
-export const FOUNDING_BENEFITS = [
-  "Hands-on setup",
-  "Custom qualification flow",
-  "Priority product input",
-  "Founder-level support",
-  "Introductory pricing",
-] as const;

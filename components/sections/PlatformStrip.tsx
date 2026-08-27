@@ -1,10 +1,10 @@
 import {
   Camera,
+  CreditCard,
+  Inbox,
   MessageCircle,
   MessagesSquare,
   Sheet,
-  Database,
-  Webhook,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { Container } from "@/components/ui/Container";
@@ -12,28 +12,29 @@ import { CREDIBILITY_CHANNELS } from "@/lib/data";
 
 const CHANNEL_ICONS: Record<(typeof CREDIBILITY_CHANNELS)[number], LucideIcon> =
   {
-    Instagram: Camera,
-    Messenger: MessagesSquare,
     WhatsApp: MessageCircle,
+    Instagram: Camera,
+    Facebook: MessagesSquare,
+    "Live inbox": Inbox,
     "Google Sheets": Sheet,
-    CRM: Database,
-    Webhooks: Webhook,
+    "Agency billing": CreditCard,
   };
 
 export function PlatformStrip() {
   return (
     <section
       className="border-y border-[var(--border)] bg-[var(--surface)]"
-      aria-label="Supported channels and integrations"
+      aria-label="Supported channels and platform"
     >
       <Container className="py-10 sm:py-12">
         <div className="mx-auto max-w-3xl text-center">
           <h2 className="font-[family-name:var(--font-display)] text-base font-medium tracking-tight text-[var(--text-primary)] sm:text-lg">
-            One AI reply team across every messaging channel
+            WhatsApp, Instagram, and Facebook — one brain
           </h2>
           <p className="mx-auto mt-3 max-w-2xl text-sm leading-relaxed text-[var(--text-secondary)] sm:text-[0.95rem]">
-            Replii monitors Instagram, Messenger, and WhatsApp so your staff does
-            not have to switch between inboxes all day.
+            The same lead flow, knowledge base, inbox, and human takeover run
+            across every client’s own Meta channels. You sell a three-channel
+            inbox, not a WhatsApp-only gadget.
           </p>
         </div>
 

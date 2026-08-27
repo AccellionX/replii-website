@@ -65,11 +65,15 @@ export function Button({
   );
 
   if (href) {
+    const external = href.startsWith("http");
     return (
       <a
         href={href}
         className={classes}
         onClick={onClick as React.MouseEventHandler<HTMLAnchorElement>}
+        {...(external
+          ? { target: "_blank", rel: "noopener noreferrer" }
+          : {})}
       >
         {content}
       </a>

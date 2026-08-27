@@ -191,8 +191,8 @@ export function ProductDemo() {
       <Container>
         <SectionHeading
           eyebrow="Interactive demo"
-          title="Watch Replii handle the inbox work first."
-          description="Choose an industry and see how Replii answers, qualifies, and prepares a lead before your team steps in."
+          title="Watch Replii close the first conversation."
+          description="Pick a client niche. See the AI greet, qualify, book a slot or take an order — then hand off to the live inbox."
         />
 
         <div className="mt-10 sm:mt-12">
@@ -521,7 +521,7 @@ function DemoPanel({
           {showOutcome ? (
             <div className="mt-6 rounded-[var(--radius-control)] border border-[var(--primary)]/25 bg-[var(--accent-mint)]/40 p-4">
               <p className="font-[family-name:var(--font-mono)] text-[0.625rem] font-medium uppercase tracking-[0.1em] text-[var(--primary-dark)]/70">
-                Your team enters here
+                Your client’s team enters here
               </p>
               <p className="mt-2 text-sm font-medium text-[var(--primary-dark)]">
                 Qualified lead summary ready

@@ -11,9 +11,9 @@ export function WorkloadComparisonSection() {
     >
       <Container>
         <SectionHeading
-          eyebrow="Before you add another inbox role"
-          title="Compare the work, not just the software."
-          description="Replii handles the repetitive workload. Your team keeps the conversations that require experience, trust, and judgment."
+          eyebrow="Before you sit in 10 WhatsApp apps"
+          title="Compare staffing 10 client inboxes to one operator."
+          description="Replii handles the first reply, qualification, booking, and orders. Your clients keep the conversations that need a person."
           align="center"
         />
 
@@ -30,7 +30,7 @@ export function WorkloadComparisonSection() {
                     Daily responsibility
                   </th>
                   <th className="px-3 py-3.5 font-[family-name:var(--font-display)] font-semibold text-[var(--text-primary)]">
-                    Manual team member
+                    Manual staffing
                   </th>
                   <th className="px-3 py-3.5 font-[family-name:var(--font-display)] font-semibold text-[var(--primary-dark)]">
                     Replii
@@ -76,7 +76,7 @@ export function WorkloadComparisonSection() {
               <dl className="mt-4 space-y-3 text-sm">
                 <div>
                   <dt className="font-[family-name:var(--font-mono)] text-[0.625rem] uppercase tracking-[0.1em] text-[var(--text-secondary)]">
-                    Manual team member
+                    Manual staffing
                   </dt>
                   <dd className="mt-1 text-[var(--text-primary)]/85">
                     {row.manual}
@@ -102,7 +102,7 @@ export function WorkloadComparisonSection() {
         </ul>
 
         <p className="mx-auto mt-8 max-w-2xl text-center text-sm leading-relaxed text-[var(--text-secondary)] sm:text-base">
-          Replii handles the repetitive workload. Your team keeps the
+          Replii handles the first-response layer. Your clients keep the
           conversations that require experience, trust, and judgment.
         </p>
       </Container>

@@ -17,21 +17,23 @@ import { useMotion } from "@/lib/motion";
 import { cn } from "@/lib/utils";
 
 const SUPPORT_POINTS = [
-  "Instant replies",
-  "24/7 coverage",
-  "Human takeover anytime",
+  "WhatsApp Business",
+  "Instagram DMs",
+  "Facebook Messenger",
+  "Live inbox + takeover",
+  "Agency billing",
 ] as const;
 
 const VALUE_POINTS = [
-  "Handles repetitive questions",
-  "Qualifies before handoff",
-  "Works after business hours",
+  "Answers ad leads in seconds",
+  "Books demos and takes orders",
+  "You bill the agency, never the shop",
 ] as const;
 
 const CHANNELS = [
-  { label: "Instagram", icon: Camera },
-  { label: "Messenger", icon: MessagesSquare },
   { label: "WhatsApp", icon: MessageCircle },
+  { label: "Instagram", icon: Camera },
+  { label: "Facebook", icon: MessagesSquare },
 ] as const;
 
 /** Animation step indices for the mockup sequence */
@@ -104,7 +106,7 @@ export function Hero() {
               animate="show"
               className="type-eyebrow"
             >
-              Your 24/7 AI lead-response team
+              For digital agencies and performance marketers
             </motion.p>
 
             <motion.h1
@@ -114,7 +116,7 @@ export function Hero() {
               animate="show"
               className="type-section mt-4 !text-[clamp(1.85rem,4.2vw,2.75rem)]"
             >
-              Don’t hire someone just to answer the same lead questions all day.
+              AI conversations that close leads — on WhatsApp, Instagram, and Facebook.
             </motion.h1>
 
             <motion.p
@@ -124,7 +126,7 @@ export function Hero() {
               animate="show"
               className="mt-5 font-[family-name:var(--font-display)] text-lg font-medium tracking-tight text-[var(--primary-dark)] sm:text-xl"
             >
-              Let Replii handle the first response.
+              An AI inbox on every client’s Meta channels.
             </motion.p>
 
             <motion.p
@@ -134,10 +136,9 @@ export function Hero() {
               animate="show"
               className="type-body-muted mt-4 max-w-md text-[0.975rem] sm:text-base"
             >
-              Replii replies to leads from your WhatsApp, Instagram, and
-              Messenger ads, answers common questions, qualifies serious
-              prospects, and sends your team the conversations that actually need
-              a person.
+              Replii answers ad leads in seconds, books demos, takes orders, and
+              lets a human jump in — while you bill the agency, never the end
+              customer.
             </motion.p>
 
             <motion.div
@@ -302,18 +303,18 @@ function HeroMockup() {
   };
 
   const summary = [
-    ["Location", "Austin, TX"],
+    ["Location", "Karachi"],
     ["Service", "Single implant"],
     ["Timeline", "This month"],
     ["Intent", "High"],
-    ["Source", "Instagram Ad"],
-    ["Next step", "Consultation"],
+    ["Source", "WhatsApp Ad"],
+    ["Next step", "Demo slot"],
   ] as const;
 
   return (
     <div ref={rootRef} className="relative w-full min-w-0 max-w-full">
       <p className="mb-2 font-[family-name:var(--font-mono)] text-[0.625rem] font-medium uppercase tracking-[0.1em] text-[var(--text-secondary)]">
-        What your team no longer has to type manually
+        What the client inbox does in seconds — without extra staff
       </p>
       <div className="overflow-hidden rounded-[var(--radius-card)] border border-[var(--border)] bg-[var(--surface)] shadow-[var(--shadow-lg)]">
         {/* App chrome */}
@@ -326,7 +327,7 @@ function HeroMockup() {
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.25 }}
                 >
-                  <Badge variant="mint">Instagram Ad</Badge>
+                  <Badge variant="mint">WhatsApp Ad</Badge>
                 </motion.div>
               ) : (
                 <span className="h-6 w-24" />
@@ -354,20 +355,20 @@ function HeroMockup() {
               <ChatBubble
                 visible={show(STEPS.reply1)}
                 side="replii"
-                text="Happy to help with approved pricing guidance. Are you looking for a single implant or a complete treatment plan?"
+                text="Happy to help with implant pricing. Are you looking for a single implant or a complete treatment plan?"
                 reduced={reduced}
                 qualify
               />
               <ChatBubble
                 visible={show(STEPS.msg2)}
                 side="customer"
-                text="Single implant in Austin. I want it done this month."
+                text="Single implant in Karachi. I want it done this month."
                 reduced={reduced}
               />
               <ChatBubble
                 visible={show(STEPS.reply2)}
                 side="replii"
-                text="Got it — location, service, and timeline noted. I can show available consultation times next."
+                text="Got it — location, service, and timeline noted. I can show available demo slots next."
                 reduced={reduced}
                 qualify
               />
@@ -381,7 +382,7 @@ function HeroMockup() {
                   >
                     <Badge variant="mint">Ready for your team</Badge>
                     <span className="inline-flex items-center rounded-full border border-[var(--border)] bg-[var(--surface)] px-2.5 py-1 text-[0.6875rem] font-medium text-[var(--primary-dark)]">
-                      Repetitive questions handled automatically
+                      Qualified · ready for takeover
                     </span>
                   </motion.div>
                 ) : null}

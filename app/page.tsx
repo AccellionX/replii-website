@@ -1,13 +1,13 @@
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
+import { AudienceSection } from "@/components/sections/AudienceSection";
 import { DashboardSection } from "@/components/sections/DashboardSection";
 import { FAQSection } from "@/components/sections/FAQSection";
 import { FeaturesSection } from "@/components/sections/FeaturesSection";
 import { FinalCTA } from "@/components/sections/FinalCTA";
-import { FoundingCustomersSection } from "@/components/sections/FoundingCustomersSection";
 import { Hero } from "@/components/sections/Hero";
 import { IndustriesSection } from "@/components/sections/IndustriesSection";
-import { PilotSection } from "@/components/sections/PilotSection";
+import { OrderSection } from "@/components/sections/OrderSection";
 import { PlatformStrip } from "@/components/sections/PlatformStrip";
 import { PricingSection } from "@/components/sections/PricingSection";
 import { ProblemSection } from "@/components/sections/ProblemSection";
@@ -29,6 +29,7 @@ export default function Home() {
         <Hero />
         <PlatformStrip />
         <ProblemSection />
+        <AudienceSection />
         <WorkflowSection />
         <ProductDemo />
         <FeaturesSection />
@@ -36,8 +37,7 @@ export default function Home() {
         <DashboardSection />
         <IndustriesSection />
         <PricingSection />
-        <PilotSection />
-        <FoundingCustomersSection />
+        <OrderSection />
         <FAQSection />
         <FinalCTA />
       </main>

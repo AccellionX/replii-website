@@ -1,0 +1,88 @@
+name: CI and deploy
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - name: Install
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Production build
+        run: npm run build
+        env:
+          NEXT_PUBLIC_SITE_URL: https://replii.accellionx.com
+          STRIPE_SECRET_KEY: sk_test_ci_placeholder
+          STRIPE_PUBLISHABLE_KEY: pk_test_ci_placeholder
+
+  deploy:
+    needs: check
+    if: github.ref == 'refs/heads/main' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
+    runs-on: ubuntu-latest
+    env:
+      APP_DIR: /opt/replii-website
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Pack release
+        run: |
+          RELEASE_ID="${GITHUB_SHA:0:12}"
+          echo "RELEASE_ID=${RELEASE_ID}" >> "${GITHUB_ENV}"
+          git archive --format=tar.gz --output="${RELEASE_ID}.tar.gz" HEAD
+
+      - name: Configure SSH
+        env:
+          DEPLOY_SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
+          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
+          DEPLOY_PORT: ${{ secrets.DEPLOY_PORT }}
+          DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
+        run: |
+          if [[ -z "${DEPLOY_SSH_KEY}" || -z "${DEPLOY_HOST}" ]]; then
+            echo "Set GitHub secrets DEPLOY_HOST and DEPLOY_SSH_KEY"
+            exit 1
+          fi
+          mkdir -p ~/.ssh
+          chmod 700 ~/.ssh
+          printf '%s\n' "${DEPLOY_SSH_KEY}" | tr -d '\r' > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          PORT="${DEPLOY_PORT:-22}"
+          REMOTE_USER="${DEPLOY_USER:-ubuntu}"
+          ssh-keyscan -p "${PORT}" -H "${DEPLOY_HOST}" >> ~/.ssh/known_hosts
+          {
+            echo "Host replii-ec2"
+            echo "  HostName ${DEPLOY_HOST}"
+            echo "  User ${REMOTE_USER}"
+            echo "  Port ${PORT}"
+            echo "  IdentityFile ~/.ssh/deploy_key"
+            echo "  IdentitiesOnly yes"
+            echo "  StrictHostKeyChecking yes"
+          } > ~/.ssh/config
+          chmod 600 ~/.ssh/config
+
+      - name: Upload tarball and deploy
+        run: |
+          ssh replii-ec2 "mkdir -p '${APP_DIR}/incoming' '${APP_DIR}/releases' '${APP_DIR}/deploy'"
+          scp "${RELEASE_ID}.tar.gz" "replii-ec2:${APP_DIR}/incoming/${RELEASE_ID}.tar.gz"
+          ssh replii-ec2 "RELEASE_ID='${RELEASE_ID}' APP_DIR='${APP_DIR}' bash -s" < deploy/deploy.sh

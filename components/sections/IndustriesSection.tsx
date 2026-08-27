@@ -1,7 +1,7 @@
 import { ArrowRight } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { industryUseCases } from "@/lib/data";
+import { industryUseCases, NICHE_TEMPLATE_CATEGORIES } from "@/lib/data";
 
 export function IndustriesSection() {
   return (
@@ -11,12 +11,28 @@ export function IndustriesSection() {
     >
       <Container>
         <SectionHeading
-          eyebrow="Industries"
-          title="Built for businesses where every inquiry matters."
-          description="See the questions staff usually answer—and what Replii can handle before handoff."
+          eyebrow="Niche templates"
+          title="Start from a vertical, then edit."
+          description="40+ niche starter packs seed greeting, questions, FAQs, and menus. Every line is editable — English, Urdu, or Roman Urdu."
         />
 
-        <ul className="mt-12 grid gap-4 sm:mt-14 sm:grid-cols-2 sm:gap-5 lg:grid-cols-2 xl:grid-cols-3">
+        <ul className="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
+          {NICHE_TEMPLATE_CATEGORIES.map((item) => (
+            <li
+              key={item.category}
+              className="rounded-[var(--radius-control)] border border-[var(--border)] bg-[var(--surface)] p-4 shadow-[var(--shadow-sm)]"
+            >
+              <p className="text-sm font-semibold text-[var(--text-primary)]">
+                {item.category}
+              </p>
+              <p className="mt-2 text-xs leading-relaxed text-[var(--text-secondary)]">
+                {item.packs}
+              </p>
+            </li>
+          ))}
+        </ul>
+
+        <ul className="mt-10 grid gap-4 sm:mt-12 sm:grid-cols-2 sm:gap-5 lg:grid-cols-2 xl:grid-cols-3">
           {industryUseCases.map((item) => (
             <li
               key={item.name}

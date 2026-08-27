@@ -8,12 +8,12 @@ export function getSiteUrl(): string {
 }
 
 export const SEO = {
-  title: "Replii — AI Lead Replies Without Extra Inbox Work",
+  title: "Replii — AI conversations that close leads on WhatsApp, Instagram, and Facebook",
   description:
-    "Replii answers and qualifies leads from Instagram, Messenger and WhatsApp so businesses can provide 24/7 first-response coverage without adding repetitive inbox workload.",
-  ogTitle: "Your 24/7 AI Lead-Response Team",
+    "The agency platform that puts an AI inbox on every client’s Meta channels. Answers ad leads in seconds, books demos, takes orders, and lets a human jump in — billed to the agency, never the shop.",
+  ogTitle: "AI conversations that close leads",
   ogDescription:
-    "Let Replii answer common questions, qualify Meta ad leads, and route serious prospects to your team.",
+    "Replii puts an AI inbox on every client’s WhatsApp, Instagram, and Facebook. Agencies subscribe. Advertisers never see a bill.",
   themeColor: "#0c1612",
   brandColor: "#0d9488",
 } as const;
@@ -29,7 +29,7 @@ export function buildSoftwareApplicationJsonLd() {
     "@type": "SoftwareApplication",
     name: SITE.name,
     applicationCategory: "BusinessApplication",
-    applicationSubCategory: "Lead management software",
+    applicationSubCategory: "Agency inbox software",
     operatingSystem: "Web",
     description: SEO.description,
     url,

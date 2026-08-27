@@ -13,16 +13,16 @@ export function ProblemSection() {
       <Container>
         <div className="max-w-2xl">
           <p className="type-eyebrow !text-[var(--accent-mint)]">
-            The hidden cost of every ad campaign
+            The problem agencies actually have
           </p>
           <h2 className="type-section mt-3 !text-[var(--text-inverse)]">
-            Running ads creates another job: answering every message.
+            The click is not the problem — the first reply is.
           </h2>
           <p className="mt-4 max-w-xl text-base leading-relaxed text-[var(--text-inverse-muted)] sm:text-lg">
-            The more leads your ads generate, the more time someone must spend
-            answering prices, availability, locations, timelines, and the same
-            basic questions repeatedly. Ignore the inbox and leads go cold. Hire
-            too early and payroll grows before revenue does.
+            Paid traffic on Meta is expensive. When a restaurant, clinic, or
+            retailer runs WhatsApp, Instagram, or Facebook ads, most leads sit
+            unread. After 5–10 minutes, intent dies. Agencies lose retainers
+            because “the ads didn’t work,” when the real leak was the inbox.
           </p>
         </div>
 
@@ -53,7 +53,7 @@ export function ProblemSection() {
         <div className="mt-12 grid gap-4 sm:grid-cols-2 sm:gap-5">
           <div className="rounded-[var(--radius-card)] border border-white/10 bg-white/[0.03] p-6">
             <p className="type-metric-label !text-[var(--text-inverse-muted)]">
-              Manual inbox workload
+              Agencies without Replii
             </p>
             <ul className="mt-4 space-y-3">
               {PROBLEM_WITHOUT.map((item) => (
@@ -94,8 +94,8 @@ export function ProblemSection() {
         </div>
 
         <p className="mt-8 rounded-[var(--radius-card)] border border-[var(--accent-mint)]/25 bg-[var(--accent-mint)]/10 px-5 py-4 text-sm leading-relaxed text-[var(--accent-mint)] sm:text-base">
-          Replii does not remove the human relationship. It removes the
-          repetitive work before the human conversation matters.
+          Replii does not remove the human relationship. It staffs the first
+          reply so the ads — and the retainer — actually work.
         </p>
       </Container>
     </section>

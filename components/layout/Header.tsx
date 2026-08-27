@@ -90,7 +90,7 @@ export function Header() {
     >
       <Container className="flex h-[var(--header-height)] items-center justify-between gap-3">
         <a
-          href="#top"
+          href="/#top"
           aria-label="Replii home"
           className="relative z-10 inline-flex min-h-11 min-w-11 items-center rounded-[var(--radius-control)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)] focus-visible:ring-offset-2"
           onClick={closeMenu}

@@ -48,7 +48,7 @@ export function Footer() {
         <div className="flex flex-col gap-10 lg:flex-row lg:justify-between lg:gap-16">
           <div className="max-w-xs shrink-0">
             <a
-              href="#top"
+              href="/#top"
               aria-label="Replii home"
               className="inline-flex min-h-11 items-center rounded-[var(--radius-control)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)]"
             >
@@ -57,8 +57,7 @@ export function Footer() {
               </span>
             </a>
             <p className="type-body-muted mt-4 text-sm">
-              {SITE.tagline}. Instantly reply, qualify and route Meta ad leads
-              across Instagram, Messenger and WhatsApp.
+              {SITE.tagline}. Agencies subscribe. Advertisers never see a bill.
             </p>
           </div>
 

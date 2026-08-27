@@ -2,11 +2,11 @@ import { Container } from "@/components/ui/Container";
 import { cn } from "@/lib/utils";
 
 const KPIS = [
-  { label: "New inquiries handled", value: "342" },
-  { label: "Qualified leads", value: "214" },
-  { label: "Repetitive questions answered", value: "1,186" },
-  { label: "Median first-response time", value: "3 sec" },
-  { label: "After-hours conversations", value: "128" },
+  { label: "Leads this month", value: "342" },
+  { label: "Qualified / booked", value: "214" },
+  { label: "AI conversations", value: "1,186" },
+  { label: "Median first-response", value: "3 sec" },
+  { label: "Orders captured", value: "86" },
   { label: "Human takeovers", value: "37" },
 ] as const;
 
@@ -30,9 +30,9 @@ const FUNNEL = [
 ] as const;
 
 const CHANNELS = [
-  { name: "Instagram", pct: 48, color: "bg-[var(--accent-mint)]" },
-  { name: "WhatsApp", pct: 31, color: "bg-[var(--primary)]" },
-  { name: "Messenger", pct: 21, color: "bg-white/35" },
+  { name: "WhatsApp", pct: 48, color: "bg-[var(--accent-mint)]" },
+  { name: "Instagram", pct: 31, color: "bg-[var(--primary)]" },
+  { name: "Facebook", pct: 21, color: "bg-white/35" },
 ] as const;
 
 const CAMPAIGNS = [
@@ -61,7 +61,7 @@ const LEADS = [
   },
   {
     lead: "Priya",
-    channel: "Messenger",
+    channel: "Facebook",
     campaign: "Downtown Apartments",
     intent: "Medium",
     status: "Qualified",
@@ -111,14 +111,14 @@ export function DashboardSection() {
       <Container className="min-w-0">
         <div className="max-w-2xl">
           <p className="type-eyebrow !text-[var(--accent-mint)]">
-            Results dashboard
+            Client analytics
           </p>
           <h2 className="type-section mt-3 !text-[var(--text-inverse)]">
-            See what Replii handled before your team stepped in.
+            Usage and analytics you can show in monthly reports.
           </h2>
           <p className="mt-4 max-w-xl text-base leading-relaxed text-[var(--text-inverse-muted)] sm:text-lg">
-            Track inquiries handled, qualification, response speed, after-hours
-            coverage and human handoffs in one place.
+            Leads today and this month, conversations, channel mix, and human
+            takeovers — pooled across the clients on your agency plan.
           </p>
         </div>
 
@@ -143,7 +143,7 @@ export function DashboardSection() {
               </div>
               <div className="min-w-0 flex-1 rounded-md border border-white/10 bg-black/30 px-3 py-1.5">
                 <p className="truncate font-[family-name:var(--font-mono)] text-[0.6875rem] text-[var(--text-inverse)]/50">
-                  app.replii.ai / results
+                  app.replii.accellionx.com / dashboard
                 </p>
               </div>
             </div>
@@ -169,7 +169,7 @@ export function DashboardSection() {
               {/* Manual inbox work avoided */}
               <div className="rounded-[var(--radius-control)] border border-white/10 bg-white/[0.03] p-4 sm:p-5">
                 <p className="font-[family-name:var(--font-mono)] text-[0.625rem] uppercase tracking-[0.1em] text-[var(--text-inverse-muted)]">
-                  Manual inbox work avoided
+                  First-response work handled
                 </p>
                 <ul className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
                   {WORKLOAD_AVOIDED.map((item) => (

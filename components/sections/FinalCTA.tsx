@@ -17,14 +17,14 @@ export function FinalCTA() {
       <Container className="relative section-pad">
         <div className="mx-auto max-w-2xl text-center">
           <p className="type-eyebrow !text-[var(--accent-mint)]">
-            Before you hire for the inbox
+            Subscribe as an agency
           </p>
           <h2 className="type-section mt-4 !text-[var(--text-inverse)]">
-            Let Replii handle the replies first.
+            Put an AI inbox on every client’s Meta channels.
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-base leading-relaxed text-[var(--text-inverse-muted)] sm:text-lg">
-            See how Replii answers, qualifies, and prepares your Meta ad leads
-            before your team spends time on them.
+            Answers ad leads in seconds, books demos, takes orders, and lets a
+            human jump in — billed to the agency, never the end customer.
           </p>
 
           <div className="mt-9 flex w-full flex-col items-stretch justify-center gap-3 sm:flex-row sm:items-center">
@@ -47,8 +47,8 @@ export function FinalCTA() {
           </div>
 
           <p className="mx-auto mt-7 max-w-md text-sm leading-relaxed text-[var(--text-inverse-muted)]">
-            We’ll demonstrate the flow using the questions your team answers
-            every day.
+            Launch $97 · Growth $297 · Unlimited $497 / month. Dashboard at
+            app.replii.accellionx.com.
           </p>
         </div>
       </Container>

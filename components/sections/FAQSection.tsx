@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useId, useState } from "react";
+import { useId } from "react";
 import { ChevronDown } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
@@ -9,21 +9,6 @@ import { cn } from "@/lib/utils";
 
 export function FAQSection() {
   const baseId = useId();
-  const [openKey, setOpenKey] = useState<string | null>(
-    `${FAQ_GROUPS[0]?.id}-0`,
-  );
-
-  const handleToggle = useCallback(
-    (key: string) => (event: React.SyntheticEvent<HTMLDetailsElement>) => {
-      const isOpen = event.currentTarget.open;
-      if (isOpen) {
-        setOpenKey(key);
-      } else if (openKey === key) {
-        setOpenKey(null);
-      }
-    },
-    [openKey],
-  );
 
   return (
     <section
@@ -34,7 +19,7 @@ export function FAQSection() {
         <div className="grid gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
           <SectionHeading
             eyebrow="FAQ"
-            title="Questions before you connect your channels."
+            title="Questions before you subscribe as an agency."
           />
 
           <div className="space-y-10">
@@ -45,14 +30,12 @@ export function FAQSection() {
                   {group.items.map((item, index) => {
                     const key = `${group.id}-${index}`;
                     const panelId = `${baseId}-${key}-panel`;
-                    const isOpen = openKey === key;
 
                     return (
                       <details
                         key={key}
+                        name="replii-faq"
                         className="group/faq faq-details"
-                        open={isOpen}
-                        onToggle={handleToggle(key)}
                       >
                         <summary
                           className={cn(

@@ -1,17 +1,16 @@
 import {
   BarChart3,
   BookOpen,
-  Building2,
   CalendarCheck,
-  FileText,
+  CreditCard,
   Globe2,
   LayoutTemplate,
-  Megaphone,
+  Lock,
   MessagesSquare,
-  Sheet,
+  Plug,
+  ShoppingCart,
   Sparkles,
-  Webhook,
-  Workflow,
+  UserPlus,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { Badge } from "@/components/ui/Badge";
@@ -23,17 +22,17 @@ import {
 } from "@/lib/data";
 import { cn } from "@/lib/utils";
 
-const MEDIUM_ICONS: LucideIcon[] = [BookOpen, CalendarCheck, Sheet];
+const MEDIUM_ICONS: LucideIcon[] = [BookOpen, CalendarCheck, ShoppingCart];
 
 const SMALL_ICONS: LucideIcon[] = [
-  FileText,
-  Megaphone,
-  Building2,
-  Globe2,
-  BarChart3,
-  Workflow,
   LayoutTemplate,
-  Webhook,
+  Globe2,
+  Sparkles,
+  BarChart3,
+  MessagesSquare,
+  Plug,
+  UserPlus,
+  Lock,
 ];
 
 const MEDIUM_FEATURES = MEDIUM_FEATURE_COPY.map((feature, i) => ({
@@ -54,26 +53,27 @@ export function FeaturesSection() {
     >
       <Container>
         <SectionHeading
-          eyebrow="The Replii platform"
-          title="Everything an inbox assistant handles before the sale."
-          description="Replii covers the repetitive first-response layer while keeping your team in full control of every important conversation."
+          eyebrow="Everything in the product"
+          title="One AI operator for every client inbox."
+          description="Replii sits on Meta’s Cloud APIs. The same qualification, knowledge base, inbox, and human takeover run across WhatsApp, Instagram, and Facebook — isolated per client."
         />
 
         {/* Bento grid */}
         <div className="mt-12 grid gap-4 sm:mt-14 sm:gap-5 lg:grid-cols-6">
-          {/* Large: 24/7 + instant response */}
+          {/* Large: instant response */}
           <article className="flex flex-col overflow-hidden rounded-[var(--radius-card)] border border-[var(--border)] bg-[var(--surface)] shadow-[var(--shadow-sm)] lg:col-span-4 lg:row-span-2">
             <div className="flex flex-1 flex-col p-6 sm:p-7">
               <div className="flex h-10 w-10 items-center justify-center rounded-[var(--radius-control)] bg-[var(--accent-mint)] text-[var(--primary-dark)]">
                 <Sparkles className="h-5 w-5" strokeWidth={1.75} />
               </div>
               <h3 className="type-subsection mt-5 !text-xl sm:!text-[1.35rem]">
-                24/7 inbox monitoring and instant first response
+                Instant AI reply on the client’s own channels
               </h3>
               <p className="type-body-muted mt-3 max-w-xl text-sm sm:text-[0.95rem]">
-                Reduce the need for someone to sit in Instagram, Messenger and
-                WhatsApp all day. Replii watches connected channels and answers
-                common questions the moment a lead writes in.
+                WhatsApp Cloud API on their own WABA and number. Instagram DMs
+                and Facebook Page inbox in the same CRM. Embedded Signup — owners
+                connect from the dashboard, no token-copying, no shared agency
+                number.
               </p>
             </div>
             <div className="border-t border-[var(--border)] bg-[var(--background)]/70 p-4 sm:p-5">
@@ -88,11 +88,12 @@ export function FeaturesSection() {
                 <MessagesSquare className="h-5 w-5" strokeWidth={1.75} />
               </div>
               <h3 className="type-subsection mt-5">
-                Automated qualification and human takeover
+                Live inbox and human takeover
               </h3>
               <p className="type-body-muted mt-3 text-sm">
-                Collect the details your team normally asks by hand, then step
-                in whenever a lead needs a person.
+                Unified inbox across clients (agency) or one business (owner).
+                Mute while a person is in the thread. Pipeline: in progress,
+                booked, needs you.
               </p>
             </div>
             <div className="mt-auto border-t border-[var(--border)] bg-[var(--background)]/70 p-4">
@@ -100,23 +101,24 @@ export function FeaturesSection() {
             </div>
           </article>
 
-          {/* Large: Ad attribution */}
+          {/* Large: Agency billing */}
           <article className="overflow-hidden rounded-[var(--radius-card)] border border-[var(--border)] bg-[var(--surface)] shadow-[var(--shadow-sm)] lg:col-span-6">
             <div className="grid gap-0 md:grid-cols-[1fr_1.1fr]">
               <div className="p-6 sm:p-7">
                 <div className="flex h-10 w-10 items-center justify-center rounded-[var(--radius-control)] bg-[var(--accent-mint)] text-[var(--primary-dark)]">
-                  <BarChart3 className="h-5 w-5" strokeWidth={1.75} />
+                  <CreditCard className="h-5 w-5" strokeWidth={1.75} />
                 </div>
                 <h3 className="type-subsection mt-5 !text-xl">
-                  Lead summaries and ad attribution
+                  Agency billing. Pooled usage. White-label.
                 </h3>
                 <p className="type-body-muted mt-3 max-w-md text-sm sm:text-[0.95rem]">
-                  Stop rebuilding context from scratch—open the summary, source
-                  ad and recommended next step before your team replies.
+                  One Stripe bill to the agency — never the shop. Invite
+                  advertisers in one step, watch clients used vs cap and pooled
+                  AI conversations, and put your name on the dashboard if entitled.
                 </p>
               </div>
               <div className="border-t border-[var(--border)] bg-[var(--surface-dark)] p-4 sm:p-5 md:border-t-0 md:border-l">
-                <AttributionVisual />
+                <AgencyBillingVisual />
               </div>
             </div>
           </article>
@@ -170,15 +172,15 @@ function QualificationFlowVisual() {
   const steps = [
     { q: "Service needed?", a: "Single implant" },
     { q: "Timeline?", a: "This month" },
-    { q: "Score", a: "High intent · 92" },
+    { q: "Next step", a: "Demo slot offered" },
   ];
 
   return (
     <div aria-hidden className="space-y-2">
       <div className="mb-3 flex flex-wrap gap-1.5">
-        <Badge variant="mint">Instagram</Badge>
-        <Badge variant="outline">Messenger</Badge>
-        <Badge variant="outline">WhatsApp</Badge>
+        <Badge variant="mint">WhatsApp</Badge>
+        <Badge variant="outline">Instagram</Badge>
+        <Badge variant="outline">Facebook</Badge>
       </div>
       {steps.map((step, i) => (
         <div
@@ -200,8 +202,8 @@ function QualificationFlowVisual() {
 
 function InboxPreviewVisual() {
   const rows = [
-    { name: "Amina", status: "Needs human", hot: true },
-    { name: "Jordan", status: "Qualifying", hot: false },
+    { name: "Amina", status: "Needs you", hot: true },
+    { name: "Jordan", status: "In progress", hot: false },
     { name: "Priya", status: "Booked", hot: false },
   ];
 
@@ -233,18 +235,18 @@ function InboxPreviewVisual() {
   );
 }
 
-function AttributionVisual() {
+function AgencyBillingVisual() {
   const rows = [
-    ["Campaign", "Dental Implants — August"],
-    ["Ad set", "Implant intent · Lookalike"],
-    ["Creative", "Before/after · Reel"],
-    ["Channel", "Instagram click-to-DM"],
+    ["Stripe customer", "The agency only"],
+    ["Clients used", "7 / 10"],
+    ["AI conversations", "4,120 / 8,000"],
+    ["White-label", "Growth add-on or Unlimited"],
   ] as const;
 
   return (
     <div aria-hidden>
       <p className="font-[family-name:var(--font-mono)] text-[0.625rem] font-medium uppercase tracking-[0.12em] text-[var(--accent-mint)]/75">
-        Conversation source
+        Agency workspace
       </p>
       <ul className="mt-4 space-y-3">
         {rows.map(([label, value]) => (

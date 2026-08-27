@@ -19,26 +19,26 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 const STAGES = [
   {
     step: "01",
-    title: "Learn",
-    body: "Replii learns your services, pricing, FAQs, policies, and qualification rules.",
-    Visual: TrainVisual,
-  },
-  {
-    step: "02",
-    title: "Monitor",
-    body: "It watches incoming WhatsApp, Instagram, and Messenger inquiries around the clock.",
+    title: "Connect",
+    body: "The owner connects WhatsApp, Instagram, and Facebook on their own brand — not a shared AccellionX number.",
     Visual: ConnectVisual,
   },
   {
+    step: "02",
+    title: "Template",
+    body: "Pick a niche pack. Greeting, questions, FAQs, and menus load in English, Urdu, or Roman Urdu. Edit any line.",
+    Visual: TrainVisual,
+  },
+  {
     step: "03",
-    title: "Respond and qualify",
-    body: "It answers repetitive questions and collects the details your team normally asks manually.",
+    title: "Qualify",
+    body: "Ads and organic DMs hit the same operator. It answers from the knowledge base, offers demo slots, or builds a cart.",
     Visual: RespondVisual,
   },
   {
     step: "04",
-    title: "Hand off",
-    body: "Qualified leads are summarized and routed to the right person for the actual sales conversation.",
+    title: "Inbox",
+    body: "A teammate takes over any chat. Leads, bookings, and orders land in CRM — with an optional Google Sheet upsert.",
     Visual: ConvertVisual,
   },
 ] as const;
@@ -52,8 +52,8 @@ export function WorkflowSection() {
       <Container>
         <SectionHeading
           eyebrow="How it works"
-          title="Replii handles the work before your team needs to step in."
-          description="AI handles repetition → Humans handle judgment and closing"
+          title="From ad click to booked lead or paid order."
+          description="Connect the client’s channels → Template → AI qualifies → Human takeover"
         />
 
         {/* Mobile: vertical stepper */}
@@ -138,9 +138,9 @@ export function WorkflowSection() {
 
 function ConnectVisual() {
   const channels = [
-    { name: "Instagram", icon: Camera, status: "Connected" },
-    { name: "Messenger", icon: MessagesSquare, status: "Connected" },
     { name: "WhatsApp", icon: MessageCircle, status: "Connected" },
+    { name: "Instagram", icon: Camera, status: "Connected" },
+    { name: "Facebook", icon: MessagesSquare, status: "Connected" },
   ];
 
   return (
@@ -165,7 +165,7 @@ function ConnectVisual() {
       })}
       <li className="flex items-center gap-2 px-1 pt-1 text-[0.6875rem] text-[var(--text-secondary)]">
         <Plug className="h-3 w-3 text-[var(--primary)]" />
-        Meta business portfolio linked
+        Own WABA · Embedded Signup
       </li>
     </ul>
   );
@@ -173,10 +173,10 @@ function ConnectVisual() {
 
 function TrainVisual() {
   const sources = [
-    { name: "FAQ", icon: HelpCircle },
-    { name: "Website", icon: Globe },
-    { name: "Document", icon: FileText },
-    { name: "Rules", icon: ListChecks },
+    { name: "Clinic", icon: HelpCircle },
+    { name: "Restaurant", icon: Globe },
+    { name: "Retail", icon: FileText },
+    { name: "Services", icon: ListChecks },
   ];
 
   return (
@@ -198,7 +198,7 @@ function TrainVisual() {
         })}
       </div>
       <p className="mt-2.5 font-[family-name:var(--font-mono)] text-[0.625rem] uppercase tracking-[0.08em] text-[var(--text-secondary)]">
-        Tone · Pricing · Qualification
+        40+ packs · EN · Urdu · Roman Urdu
       </p>
     </div>
   );
@@ -208,18 +208,18 @@ function RespondVisual() {
   return (
     <div className="space-y-2.5" aria-label="Live response thread">
       <div className="rounded-2xl rounded-bl-md bg-[var(--surface-muted)] px-2.5 py-2 text-[0.6875rem] leading-relaxed text-[var(--text-primary)]">
-        Do you offer implants this month?
+        Do you deliver biryani tonight?
       </div>
       <div className="ml-auto max-w-[92%] rounded-2xl rounded-br-md bg-[var(--accent-mint)] px-2.5 py-2 text-[0.6875rem] leading-relaxed text-[var(--primary-dark)]">
-        Yes — single or full plan? I can check consult times.
+        Yes — chicken or mutton? I can take the order here.
       </div>
       <div className="flex flex-wrap gap-1.5 pt-0.5">
         <span className="rounded-full bg-[var(--accent-mint)]/70 px-2 py-0.5 font-[family-name:var(--font-mono)] text-[0.5625rem] uppercase tracking-[0.06em] text-[var(--primary-dark)]">
-          Intent: High
+          Channel: WhatsApp
         </span>
         <span className="inline-flex items-center gap-1 rounded-full border border-[var(--border)] px-2 py-0.5 font-[family-name:var(--font-mono)] text-[0.5625rem] uppercase tracking-[0.06em] text-[var(--text-secondary)]">
           <span className="h-1.5 w-1.5 rounded-full bg-[var(--success)]" />
-          Confidence 94%
+          Cart open
         </span>
       </div>
     </div>
@@ -228,8 +228,8 @@ function RespondVisual() {
 
 function ConvertVisual() {
   const actions = [
-    { label: "Lead summarized", icon: CalendarCheck },
-    { label: "Routed to sales", icon: RefreshCw },
+    { label: "Lead in pipeline", icon: CalendarCheck },
+    { label: "Optional Sheet upsert", icon: RefreshCw },
     { label: "Human takeover ready", icon: UserRound },
   ];
 
