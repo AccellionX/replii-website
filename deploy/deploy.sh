@@ -57,7 +57,12 @@ fi
 
 export PATH="/usr/bin:/usr/local/bin:/bin:${PATH}"
 
-mkdir -p "${APP_DIR}/releases" "${APP_DIR}/incoming" "${APP_DIR}/deploy"
+sudo mkdir -p "${APP_DIR}/releases" "${APP_DIR}/incoming" "${APP_DIR}/deploy"
+sudo chown "$(id -un):$(id -gn)" \
+  "${APP_DIR}" \
+  "${APP_DIR}/releases" \
+  "${APP_DIR}/incoming" \
+  "${APP_DIR}/deploy"
 
 echo "==> Unpacking ${RELEASE_ID}"
 rm -rf "${STAGING}"

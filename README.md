@@ -50,6 +50,8 @@ Push to `main` (or **Actions → CI and deploy → Run workflow**) after the one
 
 ### One-time on EC2
 
+CI creates `/opt/replii-website` with sudo. You still need the env file (and passwordless sudo for `mkdir`/`chown`, same as the order-bot):
+
 ```bash
 sudo mkdir -p /opt/replii-website
 sudo chown ubuntu:ubuntu /opt/replii-website

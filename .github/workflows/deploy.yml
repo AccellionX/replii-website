@@ -83,6 +83,6 @@ jobs:
 
       - name: Upload tarball and deploy
         run: |
-          ssh replii-ec2 "mkdir -p '${APP_DIR}/incoming' '${APP_DIR}/releases' '${APP_DIR}/deploy'"
+          ssh replii-ec2 "sudo mkdir -p '${APP_DIR}/incoming' '${APP_DIR}/releases' '${APP_DIR}/deploy' && sudo chown -R \$(id -un):\$(id -gn) '${APP_DIR}'"
           scp "${RELEASE_ID}.tar.gz" "replii-ec2:${APP_DIR}/incoming/${RELEASE_ID}.tar.gz"
           ssh replii-ec2 "RELEASE_ID='${RELEASE_ID}' APP_DIR='${APP_DIR}' bash -s" < deploy/deploy.sh
