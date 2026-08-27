@@ -81,8 +81,24 @@ jobs:
           } > ~/.ssh/config
           chmod 600 ~/.ssh/config
 
-      - name: Upload tarball and deploy
+      - name: Upload tarball, env, and deploy
+        env:
+          STRIPE_SECRET_KEY: ${{ secrets.STRIPE_SECRET_KEY }}
+          STRIPE_PUBLISHABLE_KEY: ${{ secrets.STRIPE_PUBLISHABLE_KEY }}
         run: |
-          ssh replii-ec2 "sudo mkdir -p '${APP_DIR}/incoming' '${APP_DIR}/releases' '${APP_DIR}/deploy' && sudo chown -R \$(id -un):\$(id -gn) '${APP_DIR}'"
+          if [[ -z "${STRIPE_SECRET_KEY}" || -z "${STRIPE_PUBLISHABLE_KEY}" ]]; then
+            echo "Set GitHub secrets STRIPE_SECRET_KEY and STRIPE_PUBLISHABLE_KEY"
+            exit 1
+          fi
+          ssh replii-ec2 "sudo mkdir -p '${APP_DIR}/incoming' '${APP_DIR}/releases' '${APP_DIR}/deploy' && sudo chown \$(id -un):\$(id -gn) '${APP_DIR}' '${APP_DIR}/incoming' '${APP_DIR}/releases' '${APP_DIR}/deploy'"
+          umask 077
+          {
+            printf 'NEXT_PUBLIC_SITE_URL=https://replii.accellionx.com\n'
+            printf 'STRIPE_SECRET_KEY=%s\n' "${STRIPE_SECRET_KEY}"
+            printf 'STRIPE_PUBLISHABLE_KEY=%s\n' "${STRIPE_PUBLISHABLE_KEY}"
+          } > /tmp/replii-website.env
+          scp /tmp/replii-website.env "replii-ec2:${APP_DIR}/.env"
+          rm -f /tmp/replii-website.env
+          ssh replii-ec2 "chmod 600 '${APP_DIR}/.env'"
           scp "${RELEASE_ID}.tar.gz" "replii-ec2:${APP_DIR}/incoming/${RELEASE_ID}.tar.gz"
           ssh replii-ec2 "RELEASE_ID='${RELEASE_ID}' APP_DIR='${APP_DIR}' bash -s" < deploy/deploy.sh

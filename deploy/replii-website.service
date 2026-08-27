@@ -8,9 +8,9 @@ User=ubuntu
 Group=ubuntu
 WorkingDirectory=/opt/replii-website/current
 Environment=NODE_ENV=production
-Environment=PATH=/usr/local/bin:/usr/bin:/bin
+Environment=PATH=/opt/replii-website/.runtime/node/bin:/usr/bin:/bin
 EnvironmentFile=/opt/replii-website/.env
-ExecStart=/usr/bin/node node_modules/next/dist/bin/next start --hostname 127.0.0.1 --port 8020
+ExecStart=/opt/replii-website/.runtime/node/bin/node node_modules/next/dist/bin/next start --hostname 127.0.0.1 --port 8020
 Restart=on-failure
 RestartSec=5
 TimeoutStopSec=30

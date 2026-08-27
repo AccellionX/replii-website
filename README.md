@@ -23,12 +23,10 @@ STRIPE_SECRET_KEY=
 STRIPE_PUBLISHABLE_KEY=
 ```
 
-Production on EC2 uses `/opt/replii-website/.env` (see `deploy/env.production.example`):
+Production on EC2 uses `/opt/replii-website/.env`. CD writes it from GitHub secrets (`STRIPE_SECRET_KEY`, `STRIPE_PUBLISHABLE_KEY`) plus:
 
 ```bash
 NEXT_PUBLIC_SITE_URL=https://replii.accellionx.com
-STRIPE_SECRET_KEY=
-STRIPE_PUBLISHABLE_KEY=
 ```
 
 - `NEXT_PUBLIC_SITE_URL` is used for `metadataBase`, canonical URL, Open Graph, and Stripe return URLs. It is inlined at **build** time, so the server `.env` must be in place before deploy.
@@ -46,20 +44,21 @@ Same shape as the WhatsApp order bot: tarball → staging on `:8021` → symlink
 | Bind | `127.0.0.1:8020` (pre-flight `:8021`) |
 | App dir | `/opt/replii-website` |
 
-Push to `main` (or **Actions → CI and deploy → Run workflow**) after the one-time host setup below.
+Push to `main` (or **Actions → CI and deploy → Run workflow**) after GitHub Stripe secrets are set. Nginx/TLS for the hostname is still one-time on the host.
+
+This deploy is scoped so other apps on the same EC2 are left alone:
+
+- Only `/opt/replii-website` (not `/opt/whatsapp-order-bot` or anything else)
+- Private Node 20 under `/opt/replii-website/.runtime` — never apt, NodeSource, or `/usr/bin/node`
+- systemd unit `replii-website` only — never restart/enable other units
+- Listen on `127.0.0.1:8020` (pre-flight `:8021`); abort if another process already owns those ports
+- Nginx is **not** rewritten by CD — add a `server_name replii.accellionx.com` block yourself when ready
 
 ### One-time on EC2
 
-CI creates `/opt/replii-website` with sudo. You still need the env file (and passwordless sudo for `mkdir`/`chown`, same as the order-bot):
+Passwordless sudo for `mkdir`/`chown` of `/opt/replii-website`, `install` into `/etc/systemd/system/replii-website.service`, and `systemctl` for **that unit only** (same pattern as the order-bot).
 
-```bash
-sudo mkdir -p /opt/replii-website
-sudo chown ubuntu:ubuntu /opt/replii-website
-nano /opt/replii-website/.env   # contents from deploy/env.production.example
-chmod 600 /opt/replii-website/.env
-```
-
-Nginx + TLS (after DNS for `replii.accellionx.com` points at this instance):
+Nginx + TLS (after DNS for `replii.accellionx.com` points at this instance). This only adds a vhost; do not change other `server` blocks:
 
 ```bash
 sudo cp /path/to/nginx.replii.accellionx.com.conf /etc/nginx/sites-available/replii.accellionx.com
@@ -68,7 +67,7 @@ sudo nginx -t && sudo systemctl reload nginx
 sudo certbot --nginx -d replii.accellionx.com
 ```
 
-`ubuntu` needs passwordless sudo for `apt-get`, `install` into `/etc/systemd/system`, and `systemctl` (same as the order-bot service).
+`ubuntu` needs passwordless sudo for `mkdir`/`chown` under `/opt/replii-website`, `install` of `replii-website.service`, and `systemctl` for that unit.
 
 ### GitHub Actions secrets
 
@@ -76,10 +75,12 @@ sudo certbot --nginx -d replii.accellionx.com
 | --- | --- | --- |
 | `DEPLOY_HOST` | yes | EC2 public IP or hostname |
 | `DEPLOY_SSH_KEY` | yes | Private key whose **public** key is in `ubuntu` `~/.ssh/authorized_keys` |
+| `STRIPE_SECRET_KEY` | yes | Same live secret as local `.env` |
+| `STRIPE_PUBLISHABLE_KEY` | yes | Same live publishable key as local `.env` |
 | `DEPLOY_USER` | no | `ubuntu` if omitted |
 | `DEPLOY_PORT` | no | `22` if omitted |
 
-Stripe keys stay on the server, not in GitHub.
+CD writes `/opt/replii-website/.env` from those Stripe secrets. It does not touch other project env files.
 
 ## Scripts
 
