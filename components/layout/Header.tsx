@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useId, useRef, useState } from "react";
+import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
@@ -89,7 +90,7 @@ export function Header() {
       )}
     >
       <Container className="flex h-[var(--header-height)] items-center justify-between gap-3">
-        <a
+        <Link
           href="/#top"
           aria-label="Replii home"
           className="relative z-10 inline-flex min-h-11 min-w-11 items-center rounded-[var(--radius-control)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)] focus-visible:ring-offset-2"
@@ -98,7 +99,7 @@ export function Header() {
           <span aria-hidden="true">
             <Logo />
           </span>
-        </a>
+        </Link>
 
         <nav
           className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-0.5 md:flex"

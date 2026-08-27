@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Container } from "@/components/ui/Container";
 import { Logo } from "@/components/ui/Logo";
 import {
@@ -47,7 +48,7 @@ export function Footer() {
       <Container className="flex flex-col gap-10 py-12 sm:gap-12 sm:py-16">
         <div className="flex flex-col gap-10 lg:flex-row lg:justify-between lg:gap-16">
           <div className="max-w-xs shrink-0">
-            <a
+            <Link
               href="/#top"
               aria-label="Replii home"
               className="inline-flex min-h-11 items-center rounded-[var(--radius-control)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)]"
@@ -55,7 +56,7 @@ export function Footer() {
               <span aria-hidden="true">
                 <Logo />
               </span>
-            </a>
+            </Link>
             <p className="type-body-muted mt-4 text-sm">
               {SITE.tagline}. Agencies subscribe. Advertisers never see a bill.
             </p>
