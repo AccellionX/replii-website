@@ -12,6 +12,7 @@ import { PlatformStrip } from "@/components/sections/PlatformStrip";
 import { PricingSection } from "@/components/sections/PricingSection";
 import { ProblemSection } from "@/components/sections/ProblemSection";
 import { ProductDemo } from "@/components/sections/ProductDemo";
+import { TrustpilotSection } from "@/components/sections/TrustpilotSection";
 import { WorkflowSection } from "@/components/sections/WorkflowSection";
 import { WorkloadComparisonSection } from "@/components/sections/WorkloadComparisonSection";
 
@@ -39,6 +40,7 @@ export default function Home() {
         <PricingSection />
         <OrderSection />
         <FAQSection />
+        <TrustpilotSection />
         <FinalCTA />
       </main>
       <Footer />

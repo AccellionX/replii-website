@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { TrustBox } from "@/components/trustpilot/TrustBox";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { CONTACT_EMAIL, DASHBOARD_URL } from "@/lib/constants";
@@ -61,6 +62,16 @@ export default async function SubscribeSuccessPage({
           <Button href={`mailto:${CONTACT_EMAIL}`} variant="secondary">
             Email AccellionX
           </Button>
+        </div>
+        <div className="mt-10 border-t border-[var(--border)] pt-8">
+          <p className="type-eyebrow">Trustpilot</p>
+          <p className="type-body-muted mt-3 text-sm">
+            If this was a good start, a short review helps other agencies find
+            Replii.
+          </p>
+          <div className="mt-4 min-h-[52px] w-full">
+            <TrustBox />
+          </div>
         </div>
       </Container>
     </section>

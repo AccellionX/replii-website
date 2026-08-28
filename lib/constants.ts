@@ -2,6 +2,17 @@ export const CONTACT_EMAIL = "info@accellionx.com";
 
 export const DASHBOARD_URL = "https://app.replii.accellionx.com/dashboard/login";
 
+/** Trustpilot Review Collector (public widget ids — safe to ship in HTML). */
+export const TRUSTPILOT = {
+  businessUnitId: "6a9182e8505e68a8dc684da4",
+  templateId: "56278e9abfbbba0bdcd568bc",
+  token: "3b4ae3a6-ca9c-402b-9f22-c1c9a921e1ac",
+  locale: "en-US",
+  reviewUrl: "https://www.trustpilot.com/review/replii.accellionx.com",
+  bootstrapSrc:
+    "https://widget.trustpilot.com/bootstrap/v5/tp.widget.bootstrap.min.js",
+} as const;
+
 export const SITE = {
   name: "Replii",
   tagline: "AI conversations that close leads — on WhatsApp, Instagram, and Facebook",

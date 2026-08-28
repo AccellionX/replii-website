@@ -1,6 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import { Bricolage_Grotesque, Inter, Space_Mono } from "next/font/google";
+import Script from "next/script";
 import { JsonLd } from "@/components/seo/JsonLd";
+import { TRUSTPILOT } from "@/lib/constants";
 import { getSiteUrl, SEO } from "@/lib/seo";
 import "./globals.css";
 
@@ -91,6 +93,11 @@ export default function RootLayout({
       <body className="flex min-h-full flex-col font-[family-name:var(--font-body)]">
         <JsonLd />
         {children}
+        <Script
+          id="trustpilot-bootstrap"
+          src={TRUSTPILOT.bootstrapSrc}
+          strategy="afterInteractive"
+        />
       </body>
     </html>
   );
