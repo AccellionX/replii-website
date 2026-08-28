@@ -33,11 +33,14 @@ export function buildSoftwareApplicationJsonLd() {
     operatingSystem: "Web",
     description: SEO.description,
     url,
+    image: `${url}/logo.png`,
+    logo: `${url}/logo.png`,
     publisher: {
       "@type": "Organization",
       name: COMPANY.name,
       email: CONTACT_EMAIL,
       url,
+      logo: `${url}/logo.png`,
     },
   };
 }
