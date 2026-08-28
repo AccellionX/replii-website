@@ -52,19 +52,18 @@ This deploy is scoped so other apps on the same EC2 are left alone:
 - Private Node 20 under `/opt/replii-website/.runtime` — never apt, NodeSource, or `/usr/bin/node`
 - systemd unit `replii-website` only — never restart/enable other units
 - Listen on `127.0.0.1:8020` (pre-flight `:8021`); abort if another process already owns those ports
-- Nginx is **not** rewritten by CD — add a `server_name replii.accellionx.com` block yourself when ready
+- Nginx is updated for **this hostname only** (`replii.accellionx.com.conf`); other vhosts are not rewritten. Reload, never restart.
 
 ### One-time on EC2
 
 Passwordless sudo for `mkdir`/`chown` of `/opt/replii-website`, `install` into `/etc/systemd/system/replii-website.service`, and `systemctl` for **that unit only** (same pattern as the order-bot).
 
-Nginx + TLS (after DNS for `replii.accellionx.com` points at this instance). This only adds a vhost; do not change other `server` blocks:
+Nginx + TLS is applied by deploy (Certbot webroot at `/var/www/certbot`, same as `app.replii.accellionx.com`). To install by hand:
 
 ```bash
-sudo cp /path/to/nginx.replii.accellionx.com.conf /etc/nginx/sites-available/replii.accellionx.com
-sudo ln -sf /etc/nginx/sites-available/replii.accellionx.com /etc/nginx/sites-enabled/
-sudo nginx -t && sudo systemctl reload nginx
-sudo certbot --nginx -d replii.accellionx.com
+# HTTP first, then:
+sudo certbot certonly --webroot -w /var/www/certbot -d replii.accellionx.com --non-interactive --agree-tos --key-type ecdsa
+# then install deploy/nginx.replii.accellionx.com.conf and: sudo nginx -t && sudo systemctl reload nginx
 ```
 
 `ubuntu` needs passwordless sudo for `mkdir`/`chown` under `/opt/replii-website`, `install` of `replii-website.service`, and `systemctl` for that unit.

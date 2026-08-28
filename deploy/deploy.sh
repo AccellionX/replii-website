@@ -27,6 +27,8 @@ TEST_PORT=8021
 PROD_URL="http://127.0.0.1:${PROD_PORT}/healthz"
 KEEP_RELEASES=5
 NODE_VERSION="${NODE_VERSION:-20.19.4}"
+SITE_HOST="${SITE_HOST:-replii.accellionx.com}"
+CERTBOT_WEBROOT="/var/www/certbot"
 
 download() {
   local url="$1" dest="$2"
@@ -70,6 +72,48 @@ assert_port_ok() {
   echo "Port ${port} is already in use by another process."
   echo "Refusing to bind so other apps on this host are not disturbed."
   exit 1
+}
+
+configure_nginx_and_tls() {
+  if [[ ! -x /usr/sbin/nginx ]]; then
+    echo "nginx not found; skip public vhost"
+    return 0
+  fi
+
+  local available="/etc/nginx/sites-available/${SITE_HOST}.conf"
+  local enabled="/etc/nginx/sites-enabled/${SITE_HOST}.conf"
+  local live="/etc/letsencrypt/live/${SITE_HOST}/fullchain.pem"
+  local http_src="${STAGING}/deploy/nginx.http.conf"
+  local https_src="${STAGING}/deploy/nginx.replii.accellionx.com.conf"
+
+  sudo mkdir -p "${CERTBOT_WEBROOT}"
+
+  if [[ ! -f "${live}" ]]; then
+    echo "==> Installing HTTP vhost for ${SITE_HOST} (ACME webroot, proxy :${PROD_PORT})"
+    sudo install -m 644 "${http_src}" "${available}"
+    sudo ln -sfn "${available}" "${enabled}"
+    sudo nginx -t
+    sudo systemctl reload nginx
+
+    if ! command -v certbot >/dev/null 2>&1; then
+      echo "certbot is missing; HTTP vhost is up but TLS was not issued"
+      return 1
+    fi
+
+    echo "==> Issuing Let's Encrypt cert for ${SITE_HOST} only"
+    sudo certbot certonly \
+      --webroot -w "${CERTBOT_WEBROOT}" \
+      -d "${SITE_HOST}" \
+      --non-interactive --agree-tos \
+      --key-type ecdsa \
+      -m info@accellionx.com
+  fi
+
+  echo "==> Installing TLS vhost for ${SITE_HOST}"
+  sudo install -m 644 "${https_src}" "${available}"
+  sudo ln -sfn "${available}" "${enabled}"
+  sudo nginx -t
+  sudo systemctl reload nginx
 }
 
 ensure_private_node() {
@@ -234,6 +278,7 @@ for i in $(seq 1 30); do
       fi
       rm -rf "${old}"
     done < <(ls -1dt "${APP_DIR}/releases"/*/ 2>/dev/null || true)
+    configure_nginx_and_tls
     exit 0
   fi
   sleep 2
